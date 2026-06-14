@@ -9,7 +9,7 @@ three environments (`dev`, `qa`, `prd`) using a single **ApplicationSet**.
 gitops-repo/
 ├── charts/
 │   └── flask-aws-monitor/        # Helm chart (deployed by ArgoCD)
-├── env/
+├── flask-aws-monitor/
 │   ├── dev/values.yaml           # dev overrides
 │   ├── qa/values.yaml            # qa overrides
 │   └── prd/values.yaml           # prod overrides
@@ -29,8 +29,8 @@ gitops-repo/
 
 ## How it works
 
-The `ApplicationSet` uses a **git generator** that scans `env/*`. For each
-directory it creates an ArgoCD `Application` named `flask-<env>` that:
+The `ApplicationSet` uses a **git generator** that scans `flask-aws-monitor/*`.
+For each directory it creates an ArgoCD `Application` named `flask-<env>` that:
 
 - deploys the chart at `charts/flask-aws-monitor`
 - applies the matching `env/<env>/values.yaml`

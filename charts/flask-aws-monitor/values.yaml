@@ -4,7 +4,7 @@
 replicaCount: 2
 
 image:
-  repository: alonamog/flask-aws-monitor
+  repository: ilanamogil/flask-aws-monitor
   tag: v1
   pullPolicy: IfNotPresent
 

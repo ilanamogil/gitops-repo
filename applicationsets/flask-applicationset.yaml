@@ -5,12 +5,13 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    # Git generator: one Application per directory under env/ (dev, qa, prd)
+    # Git generator: one Application per environment directory under
+    # flask-aws-monitor/ (dev, qa, prd)
     - git:
         repoURL: https://github.com/ilanamogil/gitops-repo.git
         revision: main
         directories:
-          - path: env/*
+          - path: flask-aws-monitor/*
   template:
     metadata:
       name: 'flask-{{path.basename}}'
@@ -21,10 +22,10 @@ spec:
         targetRevision: main
         path: charts/flask-aws-monitor
         helm:
-          # Values file lives in env/<envname>/values.yaml (repo root),
-          # referenced relative to the chart path.
+          # Values file lives in flask-aws-monitor/<envname>/values.yaml
+          # (repo root), referenced relative to the chart path.
           valueFiles:
-            - ../../env/{{path.basename}}/values.yaml
+            - ../../flask-aws-monitor/{{path.basename}}/values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
