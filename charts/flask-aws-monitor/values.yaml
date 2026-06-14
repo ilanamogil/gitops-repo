@@ -1,0 +1,37 @@
+# Default values for flask-aws-monitor.
+# Override per environment by passing -f <file>.yaml on helm install/upgrade.
+
+replicaCount: 2
+
+image:
+  repository: alonamog/flask-aws-monitor
+  tag: v1
+  pullPolicy: IfNotPresent
+
+service:
+  # Use ClusterIP for in-cluster only, or LoadBalancer to expose externally.
+  type: ClusterIP
+  port: 5001
+
+ingress:
+  enabled: true
+  className: nginx
+  host: flask-monitor.local
+  path: /
+  pathType: Prefix
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# AWS credentials are intentionally blank here.
+# Real values live in aws-values.yaml (which is gitignored) and are
+# merged in at install/upgrade time with: -f aws-values.yaml
+aws:
+  region: ""
+  accessKeyId: ""
+  secretAccessKey: ""

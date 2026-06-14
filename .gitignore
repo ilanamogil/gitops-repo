@@ -1,0 +1,12 @@
+# Never commit real AWS credentials
+aws-values.yaml
+**/aws-values.yaml
+
+# Helm packaged charts
+*.tgz
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
