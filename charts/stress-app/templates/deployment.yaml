@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-stress-app
+  labels:
+    app: {{ .Release.Name }}-stress-app
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-stress-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-stress-app
+    spec:
+      containers:
+        - name: stress
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "--cpu"
+            - "{{ .Values.stress.cpuWorkers }}"
+            - "--vm"
+            - "{{ .Values.stress.vmWorkers }}"
+            - "--vm-bytes"
+            - "{{ .Values.stress.vmBytes }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

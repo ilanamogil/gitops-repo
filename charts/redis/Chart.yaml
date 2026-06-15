@@ -1,0 +1,8 @@
+apiVersion: v2
+name: redis
+description: A minimal Redis cache deployment (bonus supporting service)
+type: application
+version: 0.1.0
+appVersion: "7.2"
+maintainers:
+  - name: Ilana Mogil

@@ -1,0 +1,8 @@
+apiVersion: v2
+name: stress-app
+description: A Helm chart for a configurable CPU/memory stress workload
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+maintainers:
+  - name: Ilana Mogil

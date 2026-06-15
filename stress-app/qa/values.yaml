@@ -1,0 +1,15 @@
+# QA environment overrides for stress-app
+replicaCount: 2
+
+stress:
+  cpuWorkers: 2
+  vmWorkers: 1
+  vmBytes: 128M
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi

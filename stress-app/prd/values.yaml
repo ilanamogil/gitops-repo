@@ -1,0 +1,15 @@
+# PRD (production) environment overrides for stress-app
+replicaCount: 3
+
+stress:
+  cpuWorkers: 4
+  vmWorkers: 2
+  vmBytes: 256M
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: "1"
+    memory: 512Mi

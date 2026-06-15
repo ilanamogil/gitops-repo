@@ -1,0 +1,23 @@
+# Default values for stress-app.
+# Override per environment by passing -f <file>.yaml on helm install/upgrade.
+
+replicaCount: 1
+
+image:
+  repository: polinux/stress
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Stress workload tuning (passed as arguments to the `stress` binary).
+stress:
+  cpuWorkers: 1      # number of CPU-spinning workers
+  vmWorkers: 1       # number of memory-allocating workers
+  vmBytes: 64M       # memory allocated per vm worker
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi

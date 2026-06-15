@@ -1,0 +1,15 @@
+# DEV environment overrides for stress-app
+replicaCount: 1
+
+stress:
+  cpuWorkers: 1
+  vmWorkers: 1
+  vmBytes: 64M
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 250m
+    memory: 128Mi

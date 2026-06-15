@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: stress-applicationset
+  namespace: argocd
+spec:
+  generators:
+    # Git generator: one Application per environment directory under
+    # stress-app/ (dev, qa, prd)
+    - git:
+        repoURL: https://github.com/ilanamogil/gitops-repo.git
+        revision: main
+        directories:
+          - path: stress-app/*
+  template:
+    metadata:
+      name: 'stress-{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/ilanamogil/gitops-repo.git
+        targetRevision: main
+        path: charts/stress-app
+        helm:
+          # Values file lives in stress-app/<envname>/values.yaml (repo root),
+          # referenced relative to the chart path.
+          valueFiles:
+            - ../../stress-app/{{path.basename}}/values.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
